@@ -3,6 +3,7 @@ package com.jmmunoz.services;
 import com.jmmunoz.domain.Author;
 import com.jmmunoz.domain.Product;
 import com.jmmunoz.domain.ProductCategory;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
     private Map<Integer, Product> productMap;
