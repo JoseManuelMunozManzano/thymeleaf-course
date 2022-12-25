@@ -142,14 +142,19 @@
 <div class="jumbotron">
     <div class="container">
         <h1>Spring Framework Guru</h1>
-        <p class="lead">Online Courses for Spring Framework</p>
+        <!-- Si la propiedad no se encuentra en el fichero de idiomas, entonces va a messages.properties.
+            O en el caso de messages_en_GB.properties y messages_en_US.properties va a messages_en.properties.
+            Si ahí no existe entonces va a messages.properties -->
+        <!-- Si no se usa Spring Internationalization, entonces Thymeleaf buscará en ficheros con el nombre de la
+            plantilla, es decir, index_es.properties -->
+        <p class="lead" th:text="#{index.courses.tagline}">Tag line</p>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Spring Framework Guru Courses</h1>
+            <h1 th:text="#{index.courses.headline}">Courses Headline</h1>
         </div>
     </div>
 
