@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @Controller
 public class CheckoutController {
 
-    @RequestMapping("checkout")
+    @RequestMapping("/checkout")
     public String checkoutForm(Model model) {
         model.addAttribute("checkoutCommand", new CheckoutCommand());
 
@@ -20,9 +20,8 @@ public class CheckoutController {
     }
 
     @RequestMapping(value = "/docheckout", method = RequestMethod.POST)
-    public String doCheckout(@Valid CheckoutCommand checkoutCommand, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
+    public String doCheckout(@Valid CheckoutCommand checkoutCommand, BindingResult result) {
+        if (result.hasErrors()) {
             return "checkoutform";
         }
 
