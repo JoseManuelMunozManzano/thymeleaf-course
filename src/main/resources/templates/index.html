@@ -2,7 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Online Courses</title>
+    <!-- Ver messages.properties para ver de donde viene el texto del tag th:text -->
+    <!-- El que funcione yendo a messages.properties es gracias a la configuración de Spring.
+        Si usamos Thymeleaf sin Spring no va a ir a ese fichero, sino a un fichero properties con el
+        mismo nombre que la plantilla, es decir index.properties -->
+    <title th:text="#{index.page.title}">Page Title</title>
 
     <!-- Los tags reemplazan el contenido de la plantilla -->
     <!-- Usando el namespace th:, cuando ejecutamos la app usa Thymeleaf y coge el código de la carpeta static.
