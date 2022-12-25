@@ -165,10 +165,11 @@
                              th:text="${product.author.firstName} + ' ' + ${product.author.lastName}">
                             Author Name
                         </div>
-                        <div class="col-xs-4">
-                            <div class="small course-price" th:text="'$' + ${product.price}">
-                                $PRICE
-                            </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <!-- Lógica Condicional -->
+                        <div class="small course-price" th:text="${product.price > 0 ? '$' + product.price : 'FREE'}">
+                            $PRICE
                         </div>
                     </div>
                 </div>
