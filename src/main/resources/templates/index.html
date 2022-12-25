@@ -130,8 +130,6 @@
     </style>
 </head>
 <body>
-<!-- Usando el fragment con el tag th:replace e indicando el nombre de la plantilla html, seguido de
-    dos puntos (dos veces) y que fragment queremos usar -->
 <div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron">
     <div class="container">
         <h1>Spring Framework Guru</h1>
@@ -146,7 +144,22 @@
         </div>
     </div>
 
-    <div class="row course-list list">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        <!-- Iterando en Thymeleaf usando el tag each.
+            Creando una fila de tabla por cada producto -->
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.courseName}"></td>
+        </tr>
+    </table>
+
+    <!-- Para Thymeleaf no aparecerá toda esta lista de productos.
+        Si aparecerá si se ejecuta en el browser el fichero index.html -->
+    <div class="row course-list list" th:remove="all">
         <div class="col-md-4">
             <div class="course-listing">
                 <div class="row">
@@ -263,7 +276,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" th:remove="all">
         <div class="col-md-4">
             <div class="course-listing">
                 <div class="row">
