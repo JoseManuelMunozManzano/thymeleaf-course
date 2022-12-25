@@ -2,23 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!-- Ver messages.properties para ver de donde viene el texto del tag th:text -->
-    <!-- El que funcione yendo a messages.properties es gracias a la configuración de Spring.
-        Si usamos Thymeleaf sin Spring no va a ir a ese fichero, sino a un fichero properties con el
-        mismo nombre que la plantilla, es decir index.properties -->
     <title th:text="#{index.page.title}">Page Title</title>
 
-    <!-- Los tags reemplazan el contenido de la plantilla -->
-    <!-- Usando el namespace th:, cuando ejecutamos la app usa Thymeleaf y coge el código de la carpeta static.
-        Si se carga solo el file html usa el href -->
     <link href="../static/css/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous" th:href="@{/css/bootstrap-5.0.2-dist/css/bootstrap.min.css}">
     <script src="../static/js/jquery-3.6.3.min.js"
             th:src="@{/js/jquery-3.6.3.min.js}"></script>
 
-    <!-- Ejecutando la app coge el css de custom.css. Ejecutando el fichero html coge el style definido abajo
-         Igual abajo con las imágenes-->
     <link rel="stylesheet" th:href="@{/css/custom.css}">
     <style th:remove="all">
         .jumbotron {
@@ -139,13 +130,11 @@
     </style>
 </head>
 <body>
-<div class="jumbotron">
+<!-- Usando el fragment con el tag th:replace e indicando el nombre de la plantilla html, seguido de
+    dos puntos (dos veces) y que fragment queremos usar -->
+<div class="jumbotron" th:replace="fragments/jumbotron :: jumbotron">
     <div class="container">
         <h1>Spring Framework Guru</h1>
-        <!-- Si la propiedad no se encuentra en el fichero de idiomas-local, entonces va al fichero de idiomas.
-            Si tampoco está ahí entonces va a messages.properties. -->
-        <!-- Si no se usa Spring Internationalization, entonces Thymeleaf buscará en ficheros con el nombre de la
-            plantilla, es decir, index_es.properties -->
         <p class="lead" th:text="#{index.courses.tagline}">Tag line</p>
     </div>
 </div>
@@ -180,8 +169,6 @@
                 </div>
                 <div class="row course-listing-extra-info col-xs-12">
                     <div class="col-xs-8">
-                        <!-- Si hay que poner más atributos se usa th:attr="atributos aquí separados por comas" -->
-                        <!-- https://www.thymeleaf.org/doc/tutorials/3.1/usingthymeleaf.html -->
                         <img align="left" alt="John Thompson"
                              src="../static/images/instructor_jt.jpg"
                              th:attr="src=@{/images/instructor_jt.jpg}"
