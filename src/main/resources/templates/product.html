@@ -138,25 +138,46 @@
         </div>
     </div>
 
-    <div class="container">
-
+    <div class="container" style="height: 100vh;">
         <div class="row">
             <div class="col-md-12">
-                <h1>Spring Framework Guru - Course Name</h1>
+                <!-- Accediendo a propiedades de objeto con ${} No se usan los getters -->
+                <h1 th:text="${product.courseName}">Spring Framework Guru - Course Name</h1>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row course-listing">
             <div class="col-md-6">
-                <img src="../static/images/SpringIntroThumb.png"
-                     th:src="@{/images/SpringIntroThumb.png}"
-                     alt="TV" class="img-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="../static/images/SpringIntroThumb.png"
+                             th:src="@{'/images/' + ${product.imageUrl}}"
+                             alt="TV" class="img-fluid">
+                    </div>
+                </div>
+                <div class="row course-listing-extra-info col-xs-12">
+                    <div class="col-xs-8">
+                        <img align="left" alt="John Thompson"
+                             src="../static/images/instructor_jt.jpg"
+                             th:src="@{'/images/' + ${product.author.image}}"
+                             class="rounded-circle">
+                        <div class="small course-author-name"
+                             th:text="${product.author.firstName} + ' ' + ${product.author.lastName}">
+                            Author Name
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="small course-price" th:text="'$' + ${product.price}">
+                                $PRICE
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-6">
                 <div>
-                    <h2>Course Title</h2>
-                    <p>Parturient parturient penatibus at ipsum massa vel eu at magnis cum magna a vulputate a platea a
+                    <h2 th:text="${product.courseSubtitle}">Course Title</h2>
+                    <p th:text="${product.courseDescription}">Parturient parturient penatibus at ipsum massa vel eu at magnis cum magna a vulputate a platea a
                         a nisi a nascetur sed volutpat a placerat tellus nam ut mi.Suscipit ipsum ornare egestas laoreet
                         nisl a duis turpis vivamus aliquet imperdiet ad nec tortor adipiscing arcu in sem consectetur
                         ullamcorper pulvinar porta mi fermentum adipiscing eu condimentum.Ad a a nullam faucibus torquent
@@ -167,7 +188,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6 offset-md-6">
+            <div class="col-md-4 offset-md-6">
                 <button type="button" class="btn btn-success" th:text="#{index.courses.buy}">Buy Button</button>
             </div>
         </div>
