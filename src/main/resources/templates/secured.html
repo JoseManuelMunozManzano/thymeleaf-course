@@ -157,13 +157,15 @@
         </div>
     </div>
 
-    <div class="row" sec:authorize="isAuthenticated()">
+    <!-- Si el usuario tiene rol de administrador -->
+    <div class="row" sec:authorize="hasRole('ROLE_ADMIN')">
         <div class="col-md-10 offset-md-2">
             <h2>User Has Role Admin</h2>
         </div>
     </div>
 
-    <div class="row" sec:authorize="isAuthenticated()">
+    <!-- Si el usuario tiene rol de usuario -->
+    <div class="row" sec:authorize="hasRole('ROLE_USER')">
         <div class="col-md-10 offset-md-2">
             <h2>User Has Role User</h2>
         </div>
