@@ -147,6 +147,8 @@
     <div class="row" sec:authorize="isAuthenticated()">
         <div class="col-md-10 offset-md-2">
             <h2 style="color:green">User is Logged In</h2>
+            <!-- principal es el objeto userDetails. Accedemos con Thymeleaf usando el tag authentication -->
+            <p sec:authentication="principal.username">userName</p>
         </div>
     </div>
 
