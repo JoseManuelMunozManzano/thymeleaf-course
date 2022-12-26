@@ -3,9 +3,10 @@ package com.jmmunoz.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -16,27 +17,29 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SpringSecConfig {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin")
-                .roles("ADMIN", "USER")
-                .build();
+    public UserDetailsService userDetailsService() {
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("user")
+        manager.createUser(User.withUsername("user")
+                .password(passwordEncoder.encode("user"))
                 .roles("USER")
-                .build();
+                .build());
 
-        return new InMemoryUserDetailsManager(new UserDetails[]{admin, user});
+        manager.createUser(User.withUsername("admin")
+                .password(passwordEncoder.encode("admin"))
+                .roles("USER", "ADMIN")
+                .build());
+
+        return manager;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/", "/index/**", "/product/**", "/checkout", "/docheckout").permitAll()
+        http
+                .csrf().disable()
+                .authorizeRequests().antMatchers("/", "/index/**", "/product/**", "/checkout", "/docheckout").permitAll()
                 .and().authorizeRequests().antMatchers("/login","logout").permitAll()
                 .and().authorizeRequests().antMatchers("/static/css/**","/js/**", "/images/**", "/**/favicon.ico").permitAll()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
@@ -45,12 +48,8 @@ public class SpringSecConfig {
                 .invalidateHttpSession(true)
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/logout-success")
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-        ;
-
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
         return http.build();
     }
-
 }
