@@ -39,17 +39,29 @@
             </div>
         </div>
 
-        <div class="row mb-2">
+        <div class="row mb-2" th:class="${#fields.hasErrors('lastName')} ? 'row mb-2 is-invalid' : 'row mb-2'">
             <label class="col-sm-2 control-label">Last Name:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{lastName}"/>
+                <input type="text" class="form-control" th:field="*{lastName}" th:errorclass="is-invalid"/>
+
+                <span class="help-block" th:if="${#fields.hasErrors('lastName')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}"></li>
+                    </ul>
+                </span>
             </div>
         </div>
 
-        <div class="row mb-2">
+        <div class="row mb-2" th:class="${#fields.hasErrors('addressLine1')} ? 'row mb-2 is-invalid' : 'row mb-2'">
             <label class="col-sm-2 control-label">Address Line 1:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{addressLine1}"/>
+                <input type="text" class="form-control" th:field="*{addressLine1}" th:errorclass="is-invalid"/>
+
+                <span class="help-block" th:if="${#fields.hasErrors('addressLine1')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('addressLine1')}" th:text="${err}"></li>
+                    </ul>
+                </span>
             </div>
         </div>
 
@@ -60,24 +72,42 @@
             </div>
         </div>
 
-        <div class="row mb-2">
+        <div class="row mb-2" th:class="${#fields.hasErrors('city')} ? 'row mb-2 is-invalid' : 'row mb-2'">
             <label class="col-sm-2 control-label">City:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{city}"/>
+                <input type="text" class="form-control" th:field="*{city}" th:errorclass="is-invalid"/>
+
+                <span class="help-block" th:if="${#fields.hasErrors('city')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('city')}" th:text="${err}"></li>
+                    </ul>
+                </span>
             </div>
         </div>
 
-        <div class="row mb-2">
+        <div class="row mb-2" th:class="${#fields.hasErrors('stateCode')} ? 'row mb-2 is-invalid' : 'row mb-2'">
             <label class="col-sm-2 control-label">State Code:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{stateCode}"/>
+                <input type="text" class="form-control" th:field="*{stateCode}" th:errorclass="is-invalid"/>
+
+                <span class="help-block" th:if="${#fields.hasErrors('stateCode')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('stateCode')}" th:text="${err}"></li>
+                    </ul>
+                </span>
             </div>
         </div>
 
-        <div class="row mb-2">
+        <div class="row mb-2" th:class="${#fields.hasErrors('zipCode')} ? 'row mb-2 is-invalid' : 'row mb-2'">
             <label class="col-sm-2 control-label">Zip Code:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{zipCode}"/>
+                <input type="text" class="form-control" th:field="*{zipCode}" th:errorclass="is-invalid"/>
+
+                <span class="help-block" th:if="${#fields.hasErrors('zipCode')}">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('zipCode')}" th:text="${err}"></li>
+                    </ul>
+                </span>
             </div>
         </div>
 
